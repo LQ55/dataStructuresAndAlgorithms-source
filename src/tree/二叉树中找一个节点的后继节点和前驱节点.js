@@ -24,7 +24,7 @@ function getHouJiJieDian(node) {
         return getLeftMostNode(node.right);
     }else {
         var parent = node.parent;
-        //如果当前节点没有右节点，那么就需要向上找
+        //如果当前节点没有右节点，那么就需要向上找，直到找到一个节点是某一个父节点左孩子
         while(node.parent!=null && parent.left != node){
             node = parent;
             parent = node.parent;
