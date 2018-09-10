@@ -19,16 +19,15 @@ function Node(value) {
  * 二叉树的序列化函数（前序遍历的序列化结果）
  * @param node
  */
-function serializeBinaryTreeByPre(node) {
-    var str = "";
+function serializeBinaryTreeByPreOrder(node) {
     //如果某个节点的左子树或者右子树为空，那么就添加一个#!分隔符
     if(node == null){
         return "#!";
     }
     //否则，如果不为空，那么就通过!符号分割节点的值
     var serializeResult = node.value + "!";
-    serializeResult+=serializeBinaryTreeByPre(node.left);
-    serializeResult+=serializeBinaryTreeByPre(node.right);
+    serializeResult+=serializeBinaryTreeByPreOrder(node.left);
+    serializeResult+=serializeBinaryTreeByPreOrder(node.right);
     return serializeResult;
 }
 
@@ -36,9 +35,9 @@ function serializeBinaryTreeByPre(node) {
  *
  * @param serializeResult 序列化的结果
  */
-function handleDeserializeByPre(serializeResult) {
+function handleDeserializeByPreOrder(serializeResult) {
     var queue = serializeResult.split("!");
-    deserializeByPre(queue);
+    deserializeByPreOrder(queue);
 }
 
 /**
@@ -46,14 +45,24 @@ function handleDeserializeByPre(serializeResult) {
  * @param queue
  * @returns {*}
  */
-function deserializeByPre(queue) {
+function deserializeByPreOrder(queue) {
     var val = queue.shift();
     //如果为#表示该节点为null
     if(val == "#"){
         return null;
     }
     var head = new Node(val);
-    head.left = deserializeByPre(queue);
-    head.right = deserializeByPre(queue);
+    head.left = deserializeByPreOrder(queue);
+    head.right = deserializeByPreOrder(queue);
     return head;
+}
+
+function serializeBinaryTreeByInOrder(node) {
+    if(node == null){
+        return "#!";
+    }
+}
+
+function serializeBinaryTreeByPostOrder(node) {
+    
 }
